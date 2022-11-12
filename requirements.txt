@@ -1,2 +1,5 @@
 flask
-watchdog
+flask-wtf
+flask-login
+flask-sqlalchemy
+flask-debugtoolbar
