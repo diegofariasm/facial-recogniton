@@ -9,17 +9,6 @@ Registre-se
 <form method="POST">
 
     {{ form.hidden_tag() }}
-
-    <div class="mb3">
-        {{ form.id.label(
-        class ="form-label"
-        ) }}
-
-        {{form.id(
-        class="form-control"
-        ) }}
-    </div>
-
     <div class="mb3">
 
         {{ form.name.label(
@@ -29,34 +18,35 @@ Registre-se
         {{form.name(
         class="form-control"
         ) }}
+    </div>
 
-        <div class="mb3">
+    <div class="mb3">
 
-            {{ form.email.label(
-            class="form-label"
-            ) }}
+        {{ form.email.label(
+        class="form-label"
+        ) }}
 
-            {{form.email(
-            class="form-control"
-            ) }}
+        {{form.email(
+        class="form-control"
+        ) }}
 
-        </div>
+    </div>
 
-        <div class="mb3">
+    <div class="mb3">
 
-            {{ form.password.label(
-            class = "form-label"
-            ) }}
+        {{ form.password.label(
+        class = "form-label"
+        ) }}
 
-            {{form.password(
-            class="form-control"
-            ) }}
+        {{form.password(
+        class="form-control"
+        ) }}
 
-        </div>
-        <br>
-        {{form.submit(
-        class="btn btn-primary"
-        )}}
+    </div>
+    <br>
+    {{form.submit(
+    class="btn btn-primary"
+    )}}
 
 </form>
 

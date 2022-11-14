@@ -1,10 +1,9 @@
-from flask import Blueprint, render_template, flash
+from flask import Blueprint, render_template, redirect, url_for
+from flask_login import logout_user, login_required, current_user
 from flask_wtf import FlaskForm
 
-from wtforms import StringField, SubmitField, IntegerField, EmailField, PasswordField
+from wtforms import StringField, SubmitField, EmailField, PasswordField
 from wtforms.validators import DataRequired
-
-from werkzeug.security import generate_password_hash, check_password_hash
 
 
 from .CAluno import CAluno
@@ -13,8 +12,7 @@ from .CAluno import CAluno
 auth_routes = Blueprint("auth_routes", __name__)
 
 
-class formRegistro(FlaskForm):
-    id = IntegerField("Número da matrícula", validators=[DataRequired()])
+class FormRegistro(FlaskForm):
     name = StringField("Nome do estudante", validators=[DataRequired()])
     email = EmailField("Email do estudante", validators=[DataRequired()])
     password = PasswordField("Senha do estudante", validators=[DataRequired()])
@@ -23,33 +21,56 @@ class formRegistro(FlaskForm):
 
 @auth_routes.route("/register", methods=["GET", "POST"])
 def register():
-    id = None
     name = None
     email = None
     password = None
-    form = formRegistro()
+    form = FormRegistro()
 
     if form.validate_on_submit():
-        # Pega os valores do formulário
-        id = form.id.data
+
         name = form.name.data
         email = form.email.data
-        password = generate_password_hash(form.password.data, method="sha256")
+        password = form.password.data
 
-        if CAluno.email_used(email) or CAluno.id_used(id):
-            flash("Email em uso!", category="error")
-            flash("Número de matrícula já existe!", category="error")
-        elif CAluno.id_used(id):
-            flash("Número de matrícula já existe!", category="error")
-        else:
-            CAluno.register_student(id=id, name=name, email=email, password=password)
-            flash("Aluno cadastrado com sucesso!", category="sucess")
+        CAluno.register_student(name=name, email=email, password=password)
 
     return render_template(
-        "register.html", id=id, name=name, email=email, password=password, form=form
+        "register.html",
+        id=id,
+        name=name,
+        email=email,
+        password=password,
+        form=form,
+        user=current_user,
     )
 
 
-@auth_routes.route("/sign-in", methods=["GET", "POST"])
+class FormLogin(FlaskForm):
+    email = EmailField("Email do estudante", validators=[DataRequired()])
+    password = PasswordField("Senha do estudante", validators=[DataRequired()])
+    submit = SubmitField("Registrar-se")
+
+
+@auth_routes.route("/login", methods=["GET", "POST"])
 def login():
-    render_template("login.html")
+    email = None
+    password = None
+    form = FormLogin()
+
+    if form.validate_on_submit():
+        email = form.email.data
+        password = form.password.data
+
+        if CAluno.login_student(email, password):
+            return redirect(url_for("routes.home"))
+
+    return render_template(
+        "login.html", email=email, password=password, form=form, user=current_user
+    )
+
+
+@auth_routes.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for("auth_routes.login"))

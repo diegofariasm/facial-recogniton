@@ -1,6 +1,10 @@
 from flask import Blueprint, render_template
-routes = Blueprint('routes', __name__)
+from flask_login import login_required, current_user
 
-@routes.route('/')
+routes = Blueprint("routes", __name__)
+
+
+@routes.route("/")
+@login_required
 def home():
-    return render_template('index.html')
+    return render_template("index.html", user=current_user)

@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_debugtoolbar import DebugToolbarExtension
+from flask_login import LoginManager
 
 
 def create_app():
@@ -31,6 +32,14 @@ def create_app():
     from .controllers.auth_routes import auth_routes
 
     app.register_blueprint(auth_routes)
+
+    login_manager = LoginManager()
+    login_manager.login_view = "auth_routes.login"
+    login_manager.init_app(app)
+
+    @login_manager.user_loader
+    def load_student(id):
+        return MAluno.query.get(int(id))
 
     # Configura o aplicativo como debug
     app.debug = True

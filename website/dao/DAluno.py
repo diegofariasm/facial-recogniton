@@ -3,32 +3,30 @@ from .database import database
 
 
 class DAluno:
-    nome = ""
-    email = ""
-    password = ""
-
-    def __init__(self, id, name, email, password):
-        self.id = id
-        self.nome = name
-        self.email = email
-        self.password = password
-
     @staticmethod
-    def register_student(MAluno):
-        database.session.add(MAluno)
-        database.session.commit()
-
-    @staticmethod
-    def check_email_used(email):
-        email_aluno = MAluno.query.filter_by(email=email).first()
-        if email_aluno:
+    def email_in_db(email):
+        exists = MAluno.query.filter_by(email=email).first()
+        if exists:
             return True
         else:
             return False
 
-    def check_id_used(id):
-        id_aluno = MAluno.query.filter_by(id=id).first()
-        if id_aluno:
+    @staticmethod
+    def register_student(model_aluno):
+
+        if not DAluno.email_in_db(model_aluno.email):
+            database.session.add(model_aluno)
+            database.session.commit()
+
             return True
+        else:
+            return False
+
+    @staticmethod
+    def get_student(email):
+        student = MAluno.query.filter_by(email=email).first()
+
+        if student:
+            return student
         else:
             return False

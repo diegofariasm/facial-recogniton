@@ -10,8 +10,7 @@ class MAluno(database.Model, UserMixin):
     email = database.Column(database.String(255), unique=True)
     password = database.Column(database.String(64))
 
-    def __init__(self, id, name, email, password):
-        self.id = id
+    def __init__(self, name, email, password):
         self.name = name
         self.email = email
         self.password = password
