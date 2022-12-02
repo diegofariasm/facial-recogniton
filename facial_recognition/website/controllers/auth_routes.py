@@ -11,7 +11,6 @@ from .CAluno import CAluno
 
 auth_routes = Blueprint("auth_routes", __name__)
 
-
 class FormRegistro(FlaskForm):
     name = StringField("Nome do estudante", validators=[DataRequired()])
     email = EmailField("Email do estudante", validators=[DataRequired()])
