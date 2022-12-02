@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "Automatic student attendance register with the help of facial recognition"
 authors = ["diegofariasm <diegofarias016@gmail.com>"]
 readme = "README.md"
-packages = [{include = "facial_recognition"}]
+packages = [{include = "facial-recognition"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"

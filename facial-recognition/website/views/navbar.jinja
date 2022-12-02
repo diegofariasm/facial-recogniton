@@ -3,7 +3,7 @@
         <a class="navbar-brand" href="/">
             <img src={{ url_for('static', filename='images/logo.png' ) }} alt="Logo" width="30" height="24"
                 class="d-inline-block align-text-top">
-            EEEP José Vidal Alves
+            EEEP JOSÉ VIDAL
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,24 +29,29 @@
                         <li><a class="dropdown-item" href="#">Presentes</a></li>
                     </ul>
                 </li>
+               
+                {% endif %}
 
-                <li class="nav-item">
-                    <a class="nav-link" href="/logout">Sair</a>
-                </li>
-                {% else %}
+            </ul>
+                {% if not user.is_authenticated %}
+                <ul class="navbar-nav mb-2 mb-lg-0">
+           
                 <li class="nav-item">
                     <a class="nav-link" href="/login">Entrar</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/register">Registro</a>
                 </li>
-                {% endif %}
 
-            </ul>
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
+                </ul>
+                {% else %}
+                 <ul class="navbar-nav mb-2 mb-lg-0">      
+                 <li class="nav-item">
+                 <a class="nav-link" href="/logout">Sair</a>
+                </li>
+              </ul>  
+                {% endif %}
         </div>
+
     </div>
 </nav>
