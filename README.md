@@ -1,3 +1,7 @@
+# Material para aprendizagem:
+
+[Como Criar e Publicar um Site em Python com Flask](https://www.youtube.com/watch?v=K2ejI4z8Mbg)
+
 # Como utilizar o projeto:
 
 ## Ferramentas necessárias:
