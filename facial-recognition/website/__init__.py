@@ -13,7 +13,6 @@ def create_app():
 
     # Chave secreta do website
     app.config["SECRET_KEY"] = "reallystrongkey"
-    app.config["DEBUG_TB_INTERCEPT_REDIRECTS"] = False
     from .dao.database import configue_database, create_database
 
     configue_database(app)
@@ -46,5 +45,6 @@ def create_app():
     app.debug = True
     # Enable toolbar on debug mode
     toolbar = DebugToolbarExtension(app)
+    app.config["DEBUG_TB_INTERCEPT_REDIRECTS"] = False
 
     return app

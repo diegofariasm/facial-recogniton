@@ -12,9 +12,9 @@ from .CAluno import CAluno
 auth_routes = Blueprint("auth_routes", __name__)
 
 class FormRegistro(FlaskForm):
-    name = StringField("Nome do estudante", validators=[DataRequired()])
-    email = EmailField("Email do estudante", validators=[DataRequired()])
-    password = PasswordField("Senha do estudante", validators=[DataRequired()])
+    name = StringField("Nome do estudante:", validators=[DataRequired()])
+    email = EmailField("Email do estudante:", validators=[DataRequired()])
+    password = PasswordField("Senha do estudante:", validators=[DataRequired()])
     submit = SubmitField("Registrar-se")
 
 
@@ -46,9 +46,9 @@ def register():
 
 
 class FormLogin(FlaskForm):
-    email = EmailField("Email do estudante", validators=[DataRequired()])
-    password = PasswordField("Senha do estudante", validators=[DataRequired()])
-    submit = SubmitField("Registrar-se")
+    email = EmailField("Email do estudante:", validators=[DataRequired()])
+    password = PasswordField("Senha do estudante:", validators=[DataRequired()])
+    submit = SubmitField("Entrar")
 
 
 @auth_routes.route("/login", methods=["GET", "POST"])

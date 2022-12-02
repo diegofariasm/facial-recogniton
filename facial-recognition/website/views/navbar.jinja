@@ -11,23 +11,10 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                
                 {% if user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/">Início</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        Alunos
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Registrados</a></li>
-                        <li><a class="dropdown-item" href="#">Pendentes</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="#">Presentes</a></li>
-                    </ul>
                 </li>
                
                 {% endif %}
@@ -37,17 +24,26 @@
                 <ul class="navbar-nav mb-2 mb-lg-0">
            
                 <li class="nav-item">
-                    <a class="nav-link" href="/login">Entrar</a>
+                    <a class="nav-link" href="/login">
+                    <i class="bi bi-box-arrow-in-right"></i>
+                    Entrar
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/register">Registro</a>
+                    <a class="nav-link" href="/register">
+                    <i class="bi bi-file-person"></i>
+                    Registro
+                    </a>
                 </li>
 
                 </ul>
                 {% else %}
-                 <ul class="navbar-nav mb-2 mb-lg-0">      
+                 <ul class="navbar-nav">      
                  <li class="nav-item">
-                 <a class="nav-link" href="/logout">Sair</a>
+                 <a class="nav-link text-light" href="/logout">
+                 <i class="bi bi-box-arrow-right"></i>
+                 Sair
+                 </a>
                 </li>
               </ul>  
                 {% endif %}
