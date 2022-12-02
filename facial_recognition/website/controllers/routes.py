@@ -7,4 +7,4 @@ routes = Blueprint("routes", __name__)
 @routes.route("/")
 @login_required
 def home():
-    return render_template("index.html", user=current_user)
+    return render_template("index.jinja", user=current_user)

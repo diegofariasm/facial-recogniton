@@ -35,6 +35,7 @@ def create_app():
 
     login_manager = LoginManager()
     login_manager.login_view = "auth_routes.login"
+    login_manager.login_message = "É necessário estar logado para acessar essa página."
     login_manager.init_app(app)
 
     @login_manager.user_loader

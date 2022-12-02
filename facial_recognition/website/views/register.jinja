@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base.jinja" %}
 {% block title %}
 Registre-se
 {% endblock %}
@@ -9,7 +9,16 @@ Registre-se
 <form method="POST">
 
     {{ form.hidden_tag() }}
+    <div class="mb3">
 
+        {{ form.name.label(
+        class="form-label"
+        ) }}
+
+        {{form.name(
+        class="form-control"
+        ) }}
+    </div>
 
     <div class="mb3">
 
