@@ -13,9 +13,10 @@ def create_app():
 
     # Chave secreta do website
     app.config["SECRET_KEY"] = "reallystrongkey"
-    from .dao.database import configue_database, create_database
 
+    from .dao.database import configue_database, create_database
     configue_database(app)
+
     # É necessário importar os models para que a funcção create_database() saiba que eles existam
     from .models.MAluno import MAluno
 

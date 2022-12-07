@@ -35,7 +35,7 @@ def register():
         CAluno.login_student(email, password)
         return redirect(url_for("routes.home"))
     return render_template(
-        "register.jinja",
+        "register.html",
         id=id,
         name=name,
         email=email,
@@ -65,7 +65,11 @@ def login():
             return redirect(url_for("routes.home"))
 
     return render_template(
-        "login.jinja", email=email, password=password, form=form, user=current_user
+        "login.html", 
+        email=email, 
+        password=password, 
+        form=form, 
+        user=current_user
     )
 
 

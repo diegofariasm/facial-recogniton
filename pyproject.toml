@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "Automatic student attendance register with the help of facial recognition"
 authors = ["diegofariasm <diegofarias016@gmail.com>"]
 readme = "README.md"
-packages = [{include = "facial-recognition"}]
+packages = [{include = "facial_recognition"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
@@ -13,6 +13,8 @@ flask-wtf = "^1.0.1"
 flask-login = "^0.6.2"
 flask-sqlalchemy = "^3.0.2"
 flask-debugtoolbar = "^0.13.1"
+cleo = "^2.0.1"
+Flask-Mail = "^0.9.1"
 
 
 [build-system]
