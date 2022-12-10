@@ -1,10 +1,13 @@
 [tool.poetry]
-name = "facial-recognition"
+name = "automatic-attendance-system"
 version = "0.1.0"
 description = "Automatic student attendance register with the help of facial recognition"
 authors = ["diegofariasm <diegofarias016@gmail.com>"]
 readme = "README.md"
-packages = [{include = "facial_recognition"}]
+packages = [
+    {include = "Website", from='src'},
+    {include = "Recognition", from='src'}
+    ]
 
 [tool.poetry.dependencies]
 python = "^3.10"
@@ -15,6 +18,7 @@ flask-sqlalchemy = "^3.0.2"
 flask-debugtoolbar = "^0.13.1"
 cleo = "^2.0.1"
 Flask-Mail = "^0.9.1"
+opencv-python = "^4.6.0.66"
 
 
 [build-system]
