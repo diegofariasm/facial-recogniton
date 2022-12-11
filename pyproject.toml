@@ -12,14 +12,10 @@ packages = [
 [tool.poetry.dependencies]
 python = "^3.10"
 flask = "^2.2.2"
-flask-wtf = "^1.0.1"
-flask-login = "^0.6.2"
-flask-sqlalchemy = "^3.0.2"
 flask-debugtoolbar = "^0.13.1"
-cleo = "^2.0.1"
-Flask-Mail = "^0.9.1"
-opencv-python = "^4.6.0.66"
 
+[tool.poetry.scripts]
+start = 'runserver:start'
 
 [build-system]
 requires = ["poetry-core"]
