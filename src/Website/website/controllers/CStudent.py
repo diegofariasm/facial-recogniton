@@ -11,6 +11,12 @@ from datetime import date
 
 class CStudent:
     @staticmethod
+    def get_all_students():
+        students = DStudent.get_all_students()
+        
+        return students
+        
+    @staticmethod
     def register_student_attendance(id):
         student = MStudent.query.filter_by(id=id).first()
         student_id = student.id

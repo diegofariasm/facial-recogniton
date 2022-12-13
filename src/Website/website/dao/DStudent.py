@@ -4,6 +4,12 @@ from .database import database
 
 class DStudent:
     @staticmethod
+    def get_all_students():
+        students = MStudent.query.all()
+        
+        return students
+    
+    @staticmethod
     def email_in_db(email):
         exists = MStudent.query.filter_by(email=email).first()
         if exists:

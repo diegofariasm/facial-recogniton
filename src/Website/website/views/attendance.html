@@ -4,5 +4,26 @@
 Presença dos alunos
 {% endblock %}
 {% block body %}
-{{ user.acess }}
-{% endblock %}
+<br>
+<table class="table table-dark">
+    <thead>
+        <tr>
+            <th scope="col"> ID </th>
+            <th scope="col"> NOME </th>
+            <th scope="col"> EMAIL</th>
+            <th scope="col"> PRESENTE </th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for student in students %}
+    <tr>
+      <th scope="row"> {{ student.id }}</th>
+      <td>{{ student.name }}</td>
+      <td>{{ student.email }}</td>
+      <td>NÃO</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+
+</table>
+    {% endblock %}

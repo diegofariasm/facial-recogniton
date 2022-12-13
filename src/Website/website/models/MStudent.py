@@ -15,8 +15,6 @@ class MStudent(database.Model, UserMixin):
     name = database.Column(database.String(255))
     email = database.Column(database.String(255), unique=True)
     password = database.Column(database.String(255))
-    acess_level = database.Column(database.Integer)
-
     acess = database.Column(database.Integer)
     
     def __init__(self, name, email, password, acess = ACESS_LEVELS['user']):
