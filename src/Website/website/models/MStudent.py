@@ -8,12 +8,14 @@ ACESS_LEVELS = {
     'admin': 2
 }
 
-class MAluno(database.Model, UserMixin):
-
+class MStudent(database.Model, UserMixin):
+    __tablename__ = 'student'
+    
     id = database.Column(database.Integer, primary_key=True)
     name = database.Column(database.String(255))
     email = database.Column(database.String(255), unique=True)
     password = database.Column(database.String(255))
+    acess_level = database.Column(database.Integer)
 
     acess = database.Column(database.Integer)
     
@@ -22,9 +24,6 @@ class MAluno(database.Model, UserMixin):
         self.email = email
         self.password = password
         self.acess = acess
-    
-    def is_admin(self):
-        return self.acess == ACESS_LEVELS['admin']
     
     def is_allowed(self, acess_level):
         return self.acess >= acess_level

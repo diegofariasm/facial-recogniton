@@ -18,7 +18,8 @@ def create_app():
     configue_database(app)
 
     # É necessário importar os models para que a funcção create_database() saiba que eles existam
-    from .models.MAluno import MAluno
+    from .models.MAttendance import MAttendance
+    from .models.MStudent import MStudent
 
     # Cria o arquivo da database
     create_database(app)
@@ -40,7 +41,7 @@ def create_app():
 
     @login_manager.user_loader
     def load_student(id):
-        return MAluno.query.get(int(id))
+        return MStudent.query.get(int(id))
 
     # Configura o aplicativo como debug
     app.debug = True

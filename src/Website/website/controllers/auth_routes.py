@@ -6,7 +6,7 @@ from wtforms import StringField, SubmitField, EmailField, PasswordField
 from wtforms.validators import DataRequired
 
 
-from .CAluno import CAluno
+from .CStudent import CStudent
 
 
 auth_routes = Blueprint("auth_routes", __name__)
@@ -31,8 +31,8 @@ def register():
         email = form.email.data
         password = form.password.data
 
-        CAluno.register_student(name=name, email=email, password=password)
-        CAluno.login_student(email, password)
+        CStudent.register_student(name=name, email=email, password=password)
+        CStudent.login_student(email, password)
         return redirect(url_for("routes.home"))
     return render_template(
         "register.html",
@@ -61,7 +61,7 @@ def login():
         email = form.email.data
         password = form.password.data
 
-        if CAluno.login_student(email, password):
+        if CStudent.login_student(email, password):
             return redirect(url_for("routes.home"))
 
     return render_template(

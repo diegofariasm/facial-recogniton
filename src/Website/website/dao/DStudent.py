@@ -1,20 +1,20 @@
-from ..models.MAluno import MAluno
+from ..models.MStudent import MStudent
 from .database import database
 
 
-class DAluno:
+class DStudent:
     @staticmethod
     def email_in_db(email):
-        exists = MAluno.query.filter_by(email=email).first()
+        exists = MStudent.query.filter_by(email=email).first()
         if exists:
             return True
         else:
             return False
-
+    
     @staticmethod
     def register_student(model_aluno):
 
-        if not DAluno.email_in_db(model_aluno.email):
+        if not DStudent.email_in_db(model_aluno.email):
             database.session.add(model_aluno)
             database.session.commit()
 
@@ -24,7 +24,7 @@ class DAluno:
 
     @staticmethod
     def get_student(email):
-        student = MAluno.query.filter_by(email=email).first()
+        student = MStudent.query.filter_by(email=email).first()
 
         if student:
             return student

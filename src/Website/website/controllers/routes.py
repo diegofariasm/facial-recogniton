@@ -1,6 +1,8 @@
 from flask import Blueprint, render_template
 from flask_login import login_required, current_user
 
+from ...website.controllers.acess_level import requires_access_level
+
 routes = Blueprint("routes", __name__)
 
 
@@ -10,6 +12,8 @@ def home():
     return render_template("index.html", user=current_user)
 
 @routes.route("/attendance")
+
 @login_required
+@requires_access_level(current_user, 2)
 def attendance():
     return render_template("attendance.html", user=current_user)
