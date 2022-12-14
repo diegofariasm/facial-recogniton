@@ -1,8 +1,16 @@
 from ..models.MStudent import MStudent
+from ..models.MAttendance import MAttendance
 from .database import database
+from datetime import date
 
 
 class DStudent:
+    @staticmethod
+    def get_all_students_attendance_done():
+        students_present = MStudent.query\
+        .join(MAttendance, MAttendance.student_id==MStudent.id and MAttendance.time_done == date.today())
+        
+        return students_present
     @staticmethod
     def get_all_students():
         students = MStudent.query.all()
@@ -36,3 +44,12 @@ class DStudent:
             return student
         else:
             return False
+    @staticmethod
+    def get_student_from_id(id):
+        student = MStudent.query.filter_by(id = id).first()
+
+        if student:
+            return student
+        else:
+            return False
+    

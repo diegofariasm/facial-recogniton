@@ -27,4 +27,4 @@ def video_feed():
 @login_required
 @requires_access_level(current_user, 1)
 def attendance():
-    return render_template("attendance.html", user=current_user, students=CStudent.get_all_students())
+    return render_template("attendance.html", user=current_user, students=CStudent.get_students_attendance_done())

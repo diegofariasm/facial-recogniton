@@ -48,6 +48,6 @@ def create_app():
     app.debug = True
     # Enable toolbar on debug mode
     toolbar = DebugToolbarExtension(app)
-    app.config["DEBUG_TB_INTERCEPT_REDIRECTS"] = False
+   # app.config["DEBUG_TB_INTERCEPT_REDIRECTS"] = False
 
     return app

@@ -43,7 +43,7 @@ def register():
         photo_path = os.path.join(app.instance_path, 'photos')
         if not os.path.exists(photo_path):
             os.mkdir(photo_path)
-            
+        CStudent.login_student(email, password)
         file_ext = os.path.splitext( student_photo.filename)
         filename = str(str(current_user.id) + file_ext[1])
         student_photo.save(os.path.join(
@@ -71,14 +71,14 @@ def register():
 class FormLogin(FlaskForm):
     email = EmailField("Email do estudante:", validators=[DataRequired()])
     password = PasswordField("Senha do estudante:", validators=[DataRequired()])
-    submit = SubmitField("Entrar", validators=[FileRequired()])
+    submit = SubmitField("Entrar")
 
 
 @auth_routes.route("/login", methods=["GET", "POST"])
 def login():
+    form = FormLogin()
     email = None
     password = None
-    form = FormLogin()
 
     if form.validate_on_submit():
         email = form.email.data

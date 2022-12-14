@@ -15,10 +15,13 @@ class CStudent:
         students = DStudent.get_all_students()
         
         return students
+    def get_students_attendance_done():
+        present_students = DStudent.get_all_students_attendance_done()
         
+        return present_students
     @staticmethod
     def register_student_attendance(id):
-        student = MStudent.query.filter_by(id=id).first()
+        student = DStudent.get_student_from_id(id)
         student_id = student.id
         time_done = date.today()
         if not CStudent.student_attendance_already_done(id):
