@@ -20,6 +20,7 @@ def create_app():
     # É necessário importar os models para que a funcção create_database() saiba que eles existam
     from .models.MAttendance import MAttendance
     from .models.MStudent import MStudent
+    from .models.MPicture import MPicture
 
     # Cria o arquivo da database
     create_database(app)
