@@ -78,14 +78,25 @@ class FaceRecognition:
             self.process_current_frame = not self.process_current_frame
 
             # Display the results
-            for name in self.face_names:
-                print(f'Recognized: {name}')
+            for (top, right, bottom, left), name in zip(self.face_locations, self.face_names):
+                # Scale back up face locations since the frame we detected in was scaled to 1/4 size
+                top *= 4
+                right *= 4
+                bottom *= 4
+                left *= 4
+
+                # Create the frame with the name
+                cv2.rectangle(frame, (left, top), (right, bottom), (0, 0, 255), 2)
+                cv2.rectangle(frame, (left, bottom - 35), (right, bottom), (0, 0, 255), cv2.FILLED)
+                cv2.putText(frame, name, (left + 6, bottom - 6), cv2.FONT_HERSHEY_DUPLEX, 0.8, (255, 255, 255), 1)
+
+            # Display the resulting image
+            ret, buffer = cv2.imencode('.jpg', frame)
+
+            frame = buffer.tobytes()
             
+            
+            yield (b'--frame\r\n'
+                  b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
-        # Release handle to the webcam
-        video_capture.release()
-
-
-if __name__ == '__main__':
-    fr = FaceRecognition()
-    fr.run_recognition()
+        

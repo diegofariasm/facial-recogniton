@@ -5,17 +5,13 @@ def start():
     # Cria o reconhecedor
     fr = FaceRecognition()
     # Cria o webserver
+    app = create_app()
     
     # Inicia o webserver
-    app = create_app()
-    threading.Thread(
-                target=app.run()
-            ).start()
+    app.run()
     
     # Inicia o reconhecedor
-    threading.Thread(
-                target=fr.run_recognition()
-            ).join()
+   
     
 
 if __name__ == "__main__":
