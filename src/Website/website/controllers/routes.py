@@ -1,6 +1,5 @@
 from flask import Blueprint, render_template, Response
 from flask_login import login_required, current_user
-from Recognition.streaming import gen
 
 from ...website.controllers.acess_level import requires_access_level
 from .CStudent import CStudent
