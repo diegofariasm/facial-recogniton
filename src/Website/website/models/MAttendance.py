@@ -4,7 +4,7 @@ class MAttendance(database.Model):
     __tablename__ = 'attendance'
     
     id = database.Column(database.Integer, primary_key=True)
-    time_done = database.Column(database.DateTime)
+    time_done = database.Column(database.String(10))
     student_id = database.Column(database.ForeignKey('student.id'))
 
     def __init__(self, time, student_id):

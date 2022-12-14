@@ -1,11 +1,13 @@
 from flask import Blueprint, render_template, Response
 from flask_login import login_required, current_user
 
-from ...website.controllers.acess_level import requires_access_level
-from .CStudent import CStudent
+from Website.website.controllers.acess_level import requires_access_level
+from Website.website.controllers.CStudent import CStudent
+
 
 from Recognition.recognition import FaceRecognition
 fr = FaceRecognition()
+
 
 routes = Blueprint("routes", __name__)
 

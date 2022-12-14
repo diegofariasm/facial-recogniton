@@ -3,6 +3,9 @@ import os, sys
 import cv2
 import numpy as np
 import math
+from flask import current_app
+from Website.website.controllers.CStudent import CStudent
+from Website.website import app
 
 
 # Helper
@@ -34,7 +37,8 @@ class FaceRecognition:
             face_encoding = face_recognition.face_encodings(face_image)[0]
 
             self.known_face_encodings.append(face_encoding)
-            self.known_face_names.append(image)
+            image = os.path.splitext(image)
+            self.known_face_names.append(image[0])
         print(self.known_face_names)
 
     def run_recognition(self):
@@ -63,7 +67,6 @@ class FaceRecognition:
                     # See if the face is a match for the known face(s)
                     matches = face_recognition.compare_faces(self.known_face_encodings, face_encoding)
                     name = "Unknown"
-                    confidence = '???'
 
                     # Calculate the shortest distance to face
                     face_distances = face_recognition.face_distance(self.known_face_encodings, face_encoding)
@@ -71,9 +74,8 @@ class FaceRecognition:
                     best_match_index = np.argmin(face_distances)
                     if matches[best_match_index]:
                         name = self.known_face_names[best_match_index]
-                        confidence = face_confidence(face_distances[best_match_index])
 
-                    self.face_names.append(f'{name} ({confidence})')
+                    self.face_names.append(name)
 
             self.process_current_frame = not self.process_current_frame
 
@@ -89,7 +91,10 @@ class FaceRecognition:
                 cv2.rectangle(frame, (left, top), (right, bottom), (0, 0, 255), 2)
                 cv2.rectangle(frame, (left, bottom - 35), (right, bottom), (0, 0, 255), cv2.FILLED)
                 cv2.putText(frame, name, (left + 6, bottom - 6), cv2.FONT_HERSHEY_DUPLEX, 0.8, (255, 255, 255), 1)
-
+                
+                # Register the student frequency
+                with app.app_context():
+                    CStudent.register_student_attendance(name)
             # Display the resulting image
             ret, buffer = cv2.imencode('.jpg', frame)
 

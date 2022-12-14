@@ -17,7 +17,8 @@ class DAttendance:
     @staticmethod
     def check_attendance_done(MAttendance):
         time_done = MAttendance.time_done
-        attendance = MAttendance.query.filter_by(time_done=time_done).first()
+        student_id = MAttendance.student_id
+        attendance = MAttendance.query.filter_by(time_done=time_done, id=student_id).first()
         
         if attendance:
             return True

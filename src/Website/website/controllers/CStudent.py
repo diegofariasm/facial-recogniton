@@ -21,10 +21,20 @@ class CStudent:
         student = MStudent.query.filter_by(id=id).first()
         student_id = student.id
         time_done = date.today()
+        if not CStudent.student_attendance_already_done(id):
+            attendance = MAttendance(time_done, student_id)
+            DAttendance.register_attendance(attendance)
+    
+    @staticmethod
+    def student_attendance_already_done(id):
+        time_now = date.today()
+        attendance = MAttendance(time_now, id)
+        student_attendance = DAttendance.check_attendance_done(attendance)
         
-        attendance = MAttendance(time_done, student_id)
-        DAttendance.register_attendance(attendance)
-        
+        if student_attendance:
+            return True
+        else:
+            return False
         
     @staticmethod
     def register_student(name, email, password):

@@ -39,13 +39,16 @@ def register():
         email = form.email.data
         password = form.password.data
         student_photo = form.student_photo.data
-        filename = secure_filename(student_photo.filename)
-        
+        CStudent.register_student(name=name, email=email, password=password)
+        photo_path = os.path.join(app.instance_path, 'photos')
+        if not os.path.exists(photo_path):
+            os.mkdir(photo_path)
+            
+        file_ext = os.path.splitext( student_photo.filename)
+        filename = str(str(current_user.id) + file_ext[1])
         student_photo.save(os.path.join(
             app.instance_path, 'photos', filename
         ))
-        CStudent.register_student(name=name, email=email, password=password)
-        CStudent.login_student(email, password)
         
         # photo_data = student_photo.read()
         # CPicture.save_photo(file_name = filename, file_data=photo_data, student_id=current_user.id)
