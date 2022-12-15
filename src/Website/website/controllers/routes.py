@@ -6,7 +6,6 @@ from Website.website.controllers.CStudent import CStudent
 
 
 from Recognition.recognition import FaceRecognition
-fr = FaceRecognition()
 
 
 routes = Blueprint("routes", __name__)
@@ -21,6 +20,7 @@ def home():
 @login_required
 @requires_access_level(current_user, 1)
 def video_feed():
+    fr = FaceRecognition()
     return Response(fr.run_recognition(), mimetype='multipart/x-mixed-replace; boundary=frame')
             
 @routes.route("/attendance")
@@ -28,3 +28,9 @@ def video_feed():
 @requires_access_level(current_user, 1)
 def attendance():
     return render_template("attendance.html", user=current_user, students=CStudent.get_students_attendance_done())
+
+@routes.route("/students")
+@login_required
+@requires_access_level(current_user, 1)
+def students():
+    return render_template("students.html", user=current_user, students=CStudent.get_all_students())

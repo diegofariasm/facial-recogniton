@@ -50,8 +50,6 @@ def register():
             app.instance_path, 'photos', filename
         ))
         
-        # photo_data = student_photo.read()
-        # CPicture.save_photo(file_name = filename, file_data=photo_data, student_id=current_user.id)
         
 
         return redirect(url_for("routes.home"))
